@@ -8,16 +8,24 @@ typedef struct no{
 }no;
 
 
-no* busca(no* r, int k) {
-    if (r == NULL)
-	return NULL;
-    else if(r->valor > k) 
-        return busca(r->esq, k);
-    else if(r->valor < k)    
-	return busca(r->dir, k);
-    else  return r;
+int vazia(no *r){
+    if(r == NULL)
+	return 1;
+    else return 0;
 }
 
+int busca(no* a, int c){
+if(vazia(a)){
+printf("Elemento %d nao consta na arvore.\n",c);
+return 0;
+}
+/* árvore vazia: não encontrou */
+else {
+printf("Elemento %d consta na arvore.\n",c);
+return a->valor == c || busca(a->esq,c) || busca(a->dir,c);
+
+}
+}
 
 
 void inserirNo(no **raiz,int elemento)
@@ -107,6 +115,7 @@ void pesquisaPreOrdem(no *raiz)
 
 int altura(no *raiz){
 if(raiz==NULL)
+
 return 0;
 else {
 return  altura(raiz->esq)+ altura(raiz->dir) +1;
@@ -119,6 +128,7 @@ int main()
     int menu;
     int inserirNumero;
     int buscaNumero;
+    int resultBusca;
     int removerNumero;
     no *raiz = NULL;
     printf("\n Digite uma opção do menu\n");
@@ -128,9 +138,10 @@ int main()
     printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
     printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
     printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
+    printf("\n 7 - para verificar se arvore é vazia \n");
     //menu = getchar();
     scanf("%d", &menu);
-    while(menu < 7){
+    while(menu < 8){
 	switch (menu){
 	case 1:
 	printf("\n Digite o valor a ser inserido na arvore\n");
@@ -142,7 +153,8 @@ int main()
         printf("\n Digite o valor a ser buscado na arvore\n");
 	scanf("%d", &buscaNumero);
 	//buscar_numero = getchar();	
-	busca(raiz,buscaNumero);
+	resultBusca = busca(raiz,buscaNumero);
+	//printf("Elemento %d nao não consta na arvore.\n",resultBusca);
 	break;
 	case 3:
         printf("\n Digite o valor a ser removido da arvore\n");
@@ -162,6 +174,10 @@ int main()
 	printf("\n Imprimindo em pos-ordem\n");
 	pesquisaPosOrdem(raiz);
 	break;
+	case 7:
+	//printf("\n Imprimindo em pos-ordem\n");
+	
+	break;
 	default:
 	break;
 	}
@@ -173,6 +189,7 @@ int main()
     printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
     printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
     printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
+    printf("\n 7 - para verificar se arvore é vazia \n");
     scanf("%d", &menu);
 }
     printf("\n Saindo do programa\n");
