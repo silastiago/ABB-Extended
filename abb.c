@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 typedef struct no{
     struct no *esq;
@@ -8,14 +10,16 @@ typedef struct no{
 }no;
 
 
-int vazia(no *r){
+    no *raiz = NULL;
+
+int ABB_vazia(no *r){
     if(r == NULL)
 	return 1;
     else return 0;
 }
 
 int busca(no* a, int c){
-if(vazia(a)){
+if(ABB_vazia(a)){
 printf("Elemento %d nao consta na arvore.\n",c);
 return 0;
 }
@@ -112,15 +116,120 @@ void pesquisaPreOrdem(no *raiz)
     pesquisaPreOrdem(raiz->dir);
 }
 
-
-int altura(no *raiz){
+int nodo(no *raiz){
 if(raiz==NULL)
 
 return 0;
 else {
-return  altura(raiz->esq)+ altura(raiz->dir) +1;
+return  nodo(raiz->esq) + nodo(raiz->dir) +1;
 }
 }
+
+int altura2(no raiz)
+{
+ int alturaDir;
+ int alturaEsq;
+
+ alturaDir = 0;
+ alturaEsq = 0;
+
+ if(raiz.esq != NULL)
+   alturaEsq = altura2(*(raiz.esq));
+ if(raiz.dir != NULL)
+   alturaDir = altura2(*(raiz.dir));
+
+if((alturaEsq - alturaDir < 2 && alturaEsq - alturaDir >= 0) || (alturaDir- alturaEsq < 2 && alturaDir- alturaEsq  >= 0)){
+printf("Arvore completa \n");
+return 1;
+}
+else {
+printf("Arvore não é completa \n");
+ return 0;
+}
+}
+
+int ehCompleta(no raiz)
+{
+ int alturaDir;
+ int alturaEsq;
+
+ alturaDir = 0;
+ alturaEsq = 0;
+
+ if(raiz.esq != NULL)
+   alturaEsq = altura2(*(raiz.esq));
+ if(raiz.dir != NULL)
+   alturaDir = altura2(*(raiz.dir));
+
+if((alturaEsq - alturaDir < 2 && alturaEsq - alturaDir >= 0) || (alturaDir- alturaEsq < 2 && alturaDir- alturaEsq  >= 0)){
+printf("Arvore completa \n");
+return 1;
+}
+else {
+printf("Arvore não é completa \n");
+ return 0;
+}
+}
+
+
+
+/*
+
+int compara(int um, int outro)
+{
+ if(um - outro == 1 || outro - um == 1)
+//printf("Arvore completa \n");
+   return 0;
+//printf("Arvore não é completa \n");
+ return 1;
+}
+
+*/
+
+
+int altura(no raiz)
+{
+ int alturaDir;
+ int alturaEsq;
+
+ alturaDir = 0;
+ alturaEsq = 0;
+
+ if(raiz.esq != NULL)
+   alturaEsq = altura(*(raiz.esq));
+ if(raiz.dir != NULL)
+   alturaDir = altura(*(raiz.dir));
+
+ return max(alturaEsq, alturaDir) + 1;
+}
+/* função auxiliar para saber quem é o maior*/
+int max(int um, int outro)
+{
+ if(um > outro)
+   return um;
+ return outro;
+}
+
+int ehCheia(){
+
+	int alturaArvoreCheia;
+	int nodoArvoreCheia;
+	int resultado;
+	//no *raiz = NULL;
+	alturaArvoreCheia = altura(*raiz);
+
+	//scanf("%d", &alturaArvoreCheia);
+	resultado = (pow(2,alturaArvoreCheia))-1;	
+	nodoArvoreCheia = nodo(raiz);
+	if(resultado == nodoArvoreCheia){
+	printf("Arvore cheia \n");
+	return 1;
+	}else {
+	printf("Arvore não é cheia \n");
+	return 0;	
+	}
+}	
+
 
 int main()
 {
@@ -130,7 +239,12 @@ int main()
     int buscaNumero;
     int resultBusca;
     int removerNumero;
-    no *raiz = NULL;
+    int posicaoElemento;
+    int nodoArvore;
+    int alturaArvore;
+    int teste;
+
+
     printf("\n Digite uma opção do menu\n");
     printf("\n 1 - para inserir dado na arvore\n");
     printf("\n 2 - para buscar elemento na arvore \n");
@@ -138,10 +252,12 @@ int main()
     printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
     printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
     printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
-    printf("\n 7 - para verificar se arvore é vazia \n");
-    //menu = getchar();
+    printf("\n 7 - para saber a quantidade de nodos na arvore\n");
+    printf("\n 8 - para saber a altura da arvore\n");
+    printf("\n 9 - para saber se a arvore é cheia \n");
+    printf("\n 10 - para saber se a arvore é completa \n");
     scanf("%d", &menu);
-    while(menu < 8){
+    while(menu < 11){
 	switch (menu){
 	case 1:
 	printf("\n Digite o valor a ser inserido na arvore\n");
@@ -175,8 +291,18 @@ int main()
 	pesquisaPosOrdem(raiz);
 	break;
 	case 7:
-	//printf("\n Imprimindo em pos-ordem\n");
-	
+	nodoArvore = nodo(raiz);
+        printf("arvore tem %d nodos .\n",nodoArvore);
+	break;
+	case 8:
+	alturaArvore = altura(*raiz);
+        printf("A arvore tem altura igual a: %d .\n",alturaArvore);
+	break;
+	case 9:
+	ehCheia();
+	break;
+	case 10:
+	ehCompleta(*raiz);
 	break;
 	default:
 	break;
@@ -189,9 +315,13 @@ int main()
     printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
     printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
     printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
-    printf("\n 7 - para verificar se arvore é vazia \n");
+    printf("\n 7 - para saber a quantidade de nodos na arvore\n");
+    printf("\n 8 - para saber a altura da arvore\n");
+    printf("\n 9 - para saber se a arvore é cheia \n");
+    printf("\n 10 - para saber se a arvore é completa \n");
     scanf("%d", &menu);
 }
     printf("\n Saindo do programa\n");
     return 0;
 }
+
