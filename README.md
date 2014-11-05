@@ -13,7 +13,10 @@ Funções da arvore binaria de busca já implementadas:
  7 - para saber a quantidade de nodos na arvore
  8 - para saber a altura da arvore
  9 - para saber se a arvore é cheia 
-10 - para saber se a arvore é completa 
+ 10 - para saber se a arvore é completa 
+ 11 - para saber a quantidade de folhas da arvore 
+ 12 - para saber o enesimoElemento numa determinada posicao na arvore
+
 
 
 Para compilar o arquivo.

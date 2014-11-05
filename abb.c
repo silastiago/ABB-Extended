@@ -65,6 +65,10 @@ no *DoisFilhos(no *root){
 
 void removerNo(no **raiz,int elemento)
 {
+    if(*raiz == NULL){   
+       printf("Numero nao existe na arvore!");
+       return;
+}
     if(elemento < (*raiz)->valor){
        removerNo(&(*raiz)->esq,elemento);
     }
@@ -125,66 +129,35 @@ return  nodo(raiz->esq) + nodo(raiz->dir) +1;
 }
 }
 
-int altura2(no raiz)
-{
- int alturaDir;
- int alturaEsq;
+int ehCompleta(){
 
- alturaDir = 0;
- alturaEsq = 0;
+	int alturaArvoreCompleta;
+	int nodoArvoreCompleta;
+	int resultado;
+	//no *raiz = NULL;
+	alturaArvoreCompleta = altura(*raiz);
 
- if(raiz.esq != NULL)
-   alturaEsq = altura2(*(raiz.esq));
- if(raiz.dir != NULL)
-   alturaDir = altura2(*(raiz.dir));
+	//scanf("%d", &alturaArvoreCheia);
+	resultado = (pow(2,alturaArvoreCompleta))-1;	
+	nodoArvoreCompleta = nodo(raiz);
+	if(nodoArvoreCompleta > (alturaArvoreCompleta + 1) && nodoArvoreCompleta <= (resultado )){
+	printf("Arvore ccompleta \n");
+	return 1;
+	}else {
+	printf("Arvore não é completa \n");
+	return 0;	
+	}
+}	
 
-if((alturaEsq - alturaDir < 2 && alturaEsq - alturaDir >= 0) || (alturaDir- alturaEsq < 2 && alturaDir- alturaEsq  >= 0)){
-printf("Arvore completa \n");
-return 1;
-}
-else {
-printf("Arvore não é completa \n");
- return 0;
-}
-}
 
-int ehCompleta(no raiz)
-{
- int alturaDir;
- int alturaEsq;
-
- alturaDir = 0;
- alturaEsq = 0;
-
- if(raiz.esq != NULL)
-   alturaEsq = altura2(*(raiz.esq));
- if(raiz.dir != NULL)
-   alturaDir = altura2(*(raiz.dir));
-
-if((alturaEsq - alturaDir < 2 && alturaEsq - alturaDir >= 0) || (alturaDir- alturaEsq < 2 && alturaDir- alturaEsq  >= 0)){
-printf("Arvore completa \n");
-return 1;
-}
-else {
-printf("Arvore não é completa \n");
- return 0;
-}
+int contarFolhas(no *raiz){
+   if(raiz == NULL)
+        return 0;
+   if(raiz->esq == NULL && raiz->dir == NULL)
+        return 1;
+   return contarFolhas(raiz->esq) + contarFolhas(raiz->dir);
 }
 
-
-
-/*
-
-int compara(int um, int outro)
-{
- if(um - outro == 1 || outro - um == 1)
-//printf("Arvore completa \n");
-   return 0;
-//printf("Arvore não é completa \n");
- return 1;
-}
-
-*/
 
 
 int altura(no raiz)
@@ -222,13 +195,36 @@ int ehCheia(){
 	resultado = (pow(2,alturaArvoreCheia))-1;	
 	nodoArvoreCheia = nodo(raiz);
 	if(resultado == nodoArvoreCheia){
-	printf("Arvore cheia \n");
+	printf("Arvore é cheia \n");
 	return 1;
 	}else {
 	printf("Arvore não é cheia \n");
 	return 0;	
 	}
 }	
+
+
+void enesimoElemento(no *raiz, int n)
+{
+    int achou = 0;
+    if(raiz == NULL)
+	return;
+    if(achou == n){
+	//int teste = raiz->valor;	
+	//printf("A posicao %d corresponde ao elemento %d \n",n, teste);
+	enesimoElemento(raiz->esq,n);
+	raiz->valor;    
+	enesimoElemento(raiz->dir,n);
+	achou = achou +1;
+}
+    
+    
+
+	
+
+	printf("o valor  de achou é  %d \n",achou);	
+	
+}
 
 
 int main()
@@ -243,6 +239,8 @@ int main()
     int nodoArvore;
     int alturaArvore;
     int teste;
+    int qtdFolhas;
+    int position;
 
 
     printf("\n Digite uma opção do menu\n");
@@ -256,8 +254,10 @@ int main()
     printf("\n 8 - para saber a altura da arvore\n");
     printf("\n 9 - para saber se a arvore é cheia \n");
     printf("\n 10 - para saber se a arvore é completa \n");
+    printf("\n 11 - para saber a quantidade de folhas da arvore \n");
+    printf("\n 12 - para saber o enesimoElemento numa determinada posicao na arvore\n");
     scanf("%d", &menu);
-    while(menu < 11){
+    while(menu < 13){
 	switch (menu){
 	case 1:
 	printf("\n Digite o valor a ser inserido na arvore\n");
@@ -302,7 +302,17 @@ int main()
 	ehCheia();
 	break;
 	case 10:
-	ehCompleta(*raiz);
+	ehCompleta();
+	//ehCompleta(*raiz);
+	break;
+	case 11:
+	qtdFolhas = contarFolhas(raiz);
+	printf("A arvore tem %d folhas.\n",qtdFolhas);
+	break;
+	case 12:
+	printf("\n Digite o valor da ser buscada na arvore\n");
+	scanf("%d", &position);
+	enesimoElemento(raiz, position);
 	break;
 	default:
 	break;
@@ -319,6 +329,8 @@ int main()
     printf("\n 8 - para saber a altura da arvore\n");
     printf("\n 9 - para saber se a arvore é cheia \n");
     printf("\n 10 - para saber se a arvore é completa \n");
+    printf("\n 11 - para saber a quantidade de folhas da arvore \n");
+    printf("\n 12 - para saber o enesimoElemento numa determinada posicao na arvore\n");
     scanf("%d", &menu);
 }
     printf("\n Saindo do programa\n");
