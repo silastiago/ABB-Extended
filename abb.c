@@ -217,7 +217,7 @@ int posicao(no *raiz, int tam, int n)
 	if(n == raiz->valor)
 	posicao(raiz->dir, tam, n);
 
-}			
+}		
 
 void toString(no* root, int level)
 	{
@@ -254,7 +254,18 @@ printf("A arvore não é completa\n");
  }
 }
 
+int enesimoElemento(int n, no* raiz) {
+  int count;
+  int enesimoValor;
 
+  for (count = 0; count <= n-1; count++) {
+    if(raiz == NULL) break;
+      pesquisaOrdemSimetrica(raiz->esq);
+      enesimoValor = raiz->valor;
+      pesquisaOrdemSimetrica(raiz->dir);
+  }
+  return enesimoValor;
+}
 
 
 
