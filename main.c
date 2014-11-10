@@ -1,4 +1,27 @@
-#include "abb.c"
+#include "construtor.c"
+
+int showMenu() {
+	int menu;
+
+	printf("\n Digite uma opção do menu\n");
+    printf("1 - Inserir\n");
+    printf("2 - Buscar\n");
+    printf("3 - Remover\n");
+    printf("4 - Imprimir Pre-ordem \n");
+    printf("5 - Imprimir Ordem-simetrica \n");
+    printf("6 - Imprimir Pos-ordem \n");
+    printf("7 - Imprimir Decrescente\n");
+    printf("8 - Quantidade de nodos\n");
+    printf("9 - Altura\n");
+    printf("10 - Cheia \n");
+    printf("11 - Completa \n");
+    printf("12 - Quantidade de folhas\n");
+    printf("13 - N-esimo elemento\n");
+    printf("14 - Sequencia em nivel\n");
+    scanf("%d", &menu);
+
+    return menu;
+}
 
 int main() {
 
@@ -14,24 +37,9 @@ int main() {
     int qtdFolhas;
     int lugar;
     int localizacao;
-    no *root = NULL;
+    no *raiz = NULL;
 
-    printf("\n Digite uma opção do menu\n");
-    printf("\n 1 - para inserir dado na arvore\n");
-    printf("\n 2 - para buscar elemento na arvore \n");
-    printf("\n 3 - para remover elemento na arvore \n");
-    printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
-    printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
-    printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
-    printf("\n 7 - para imprimir os elementos da arvore em ordem decrescente\n");
-    printf("\n 8 - para saber a quantidade de nodos na arvore\n");
-    printf("\n 9 - para saber a altura da arvore \n");
-    printf("\n 10 - para saber se a arvore é cheia \n");
-    printf("\n 11 - para saber se a arvore é completa \n");
-    printf("\n 12 - para saber a quantidade de folhas da arvore\n");
-    printf("\n 13 - para saber o enesimoElemento numa determinada posicao na arvore\n");
-    printf("\n 14 - para saber a sequencia dos elementos em nivel\n");
-    scanf("%d", &menu);
+    menu = showMenu();
     
     while(menu < 15){
 		switch (menu){
@@ -41,7 +49,7 @@ int main() {
 			//inserirNo(&raiz,inserirNumero);
 
 			//Inserundo valores para testes
-			inserirNo(&raiz,8);	
+			/*inserirNo(&raiz,8);	
 			inserirNo(&raiz,3);
 			inserirNo(&raiz,1);
 			inserirNo(&raiz,6);
@@ -50,6 +58,10 @@ int main() {
 			inserirNo(&raiz,10);
 			inserirNo(&raiz,9);
 			inserirNo(&raiz,11);
+			*/
+
+			construirDeArquivo(&raiz);
+
 			break;
 
 			case 2:
@@ -99,10 +111,11 @@ int main() {
 				printf("A arvore tem %d folhas.\n",qtdFolhas);
 			break;
 			case 13:
-				printf("Digite o valor a ser buscado.\n");
-				scanf("%d", &lugar); 
-				localizacao = posicao(raiz, 1, lugar);
-				printf("Achou é igual a: %d",localizacao);
+				printf("Informe um valor n para pesquisa do n-esimo elemento.\n");
+				int n;
+				scanf("%d", n);
+				enesimoElemento(n, raiz);
+				printf("O n-esimo elemento é: ");
 			break;
 			case 14:
 				printf("Os elementos em nivel são: ");
@@ -114,22 +127,8 @@ int main() {
 			default:
 			break;
 		}
+	    menu = showMenu();
 
-	    printf("\n 1 - para inserir dado na arvore\n");
-	    printf("\n 2 - para buscar elemento na arvore \n");
-	    printf("\n 3 - para remover elemento na arvore \n");
-	    printf("\n 4 - para imprimir os elementos da arvore em pre-ordem \n");
-	    printf("\n 5 - para imprimir os elementos da arvore em ordem-simetrica \n");
-	    printf("\n 6 - para imprimir os elementos da arvore em pos-ordem \n");
-	    printf("\n 7 - para imprimir os elementos da arvore em ordem decrescente\n");
-	    printf("\n 8 - para saber a quantidade de nodos na arvore\n");
-	    printf("\n 9 - para saber a altura da arvore \n");
-	    printf("\n 10 - para saber se a arvore é cheia \n");
-	    printf("\n 11 - para saber se a arvore é completa \n");
-	    printf("\n 12 - para saber a quantidade de folhas da arvore\n");
-	    printf("\n 13 - para saber o enesimoElemento numa determinada posicao na arvore\n");
-	    printf("\n 14 - para saber a sequencia dos elementos em nivel\n");
-	    scanf("%d", &menu);
 	}
     printf("\n Saindo do programa\n");
     return 0;

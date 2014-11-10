@@ -34,7 +34,7 @@ void inserirNo(no **raiz,int elemento) {
         aux->valor = elemento;
         aux->dir = aux->esq = NULL;
         *raiz = aux;
-        printf("Elemento %d foi inserido com sucesso.\n",elemento);
+        printf("%d foi inserido na ABB.\n",elemento);
         return;
     }
     if(elemento < (*raiz)->valor) {
@@ -45,7 +45,7 @@ void inserirNo(no **raiz,int elemento) {
         inserirNo(&(*raiz)->dir,elemento);
         return;
     }
-    printf("Elemento %d ja existe na arvore.\n",elemento);
+    printf("%d ja existe na ABB.\n",elemento);
 }
 
 no* DoisFilhos(no *root){
@@ -178,8 +178,9 @@ int ehCheia(){
 }   
 
 // Verificar return para raiz NULL
+// > Trocando temporariamente "return;" por "return -1;" 
 int posicao(no *raiz, int tam, int n) {
-    if(raiz == NULL) return;
+    if(raiz == NULL) return -1;
     posicao(raiz->esq, tam, n);
     tam = tam + 1;
     if(n == raiz->valor) return tam;

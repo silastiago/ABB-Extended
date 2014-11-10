@@ -3,23 +3,20 @@ ABB-Extended
 
 Funções da arvore binaria de busca já implementadas:
 
- 1 - para inserir dado na arvore
- 2 - para buscar elemento na arvore 
- 3 - para remover elemento na arvore 
- 4 - para imprimir os elementos da arvore em pre-ordem 
- 5 - para imprimir os elementos da arvore em ordem-simetrica 
- 6 - para imprimir os elementos da arvore em pos-ordem 
- 7 - para imprimir os elementos da arvore em ordem decrescente
- 8 - para saber a quantidade de nodos na arvore
- 9 - para saber a altura da arvore 
- 10 - para saber se a arvore é cheia 
- 11 - para saber se a arvore é completa 
- 12 - para saber a quantidade de folhas da arvore
- 13 - para saber a sequencia dos elementos em nivel
- 14 - Sair do programa
-
-
-
+1 - Inserir
+2 - Buscar
+3 - Remover
+4 - Imprimir Pre-ordem
+5 - Imprimir Ordem-simetrica
+6 - Imprimir Pos-ordem
+7 - Imprimir Decrescente
+8 - Quantidade de nodos
+9 - Altura
+10 - Cheia
+11 - Completa
+12 - Quantidade de folhas
+13 - N-esimo elemento
+14 - Sequencia em nivel
 
 Para compilar projeto:
 
