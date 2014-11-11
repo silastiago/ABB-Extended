@@ -12,8 +12,8 @@ typedef struct no{
 
 no *raiz = NULL;
 
-int ABB_vazia(no *r){
-    if(r == NULL) return 1;
+int ABB_vazia(no *raiz){
+    if(raiz == NULL) return 1;
     else return 0;
 }
 
@@ -27,70 +27,70 @@ no* busca(no* raiz, int elemento) {
     }
 }
 
-void inserirNo(no **raiz,int elemento) {
-    if(*raiz == NULL) {
+void inserirNo(no *raiz, int elemento) {
+    if(raiz == NULL) {
         no *aux = (no *)malloc(sizeof(no));
         aux->valor = elemento;
         aux->dir = aux->esq = NULL;
-        *raiz = aux;
+        raiz = aux;
         printf("%d foi inserido na ABB.\n",elemento);
         return;
     }
-    if(elemento < (*raiz)->valor) {
-        inserirNo(&(*raiz)->esq,elemento);
+    if(elemento < (raiz)->valor) {
+        inserirNo((raiz)->esq,elemento);
         return;
     }
-    if(elemento > (*raiz)->valor) {
-        inserirNo(&(*raiz)->dir,elemento);
+    if(elemento > (raiz)->valor) {
+        inserirNo((raiz)->dir,elemento);
         return;
     }
     printf("%d ja existe na ABB.\n",elemento);
 }
 
-no* DoisFilhos(no *root){
-    if(root==NULL)
+no* DoisFilhos(no *raiz){
+    if(raiz==NULL)
         return NULL;
-    else if(root->esq == NULL)
-        return root;
+    else if(raiz->esq == NULL)
+        return raiz;
     else
-        return DoisFilhos(root->esq);
+        return DoisFilhos(raiz->esq);
 }
 
-void removerNo(no **raiz,int elemento) {
-    if(*raiz == NULL){   
+void removerNo(no *raiz,int elemento) {
+    if(raiz == NULL){   
         printf("Numero nao existe na arvore!");
         return;
     }
-    if(elemento < (*raiz)->valor){
-        removerNo(&(*raiz)->esq,elemento);
+    if(elemento < (raiz)->valor){
+        removerNo((raiz)->esq,elemento);
     }
-    else if(elemento > (*raiz)->valor){
-        removerNo(&(*raiz)->dir,elemento);
+    else if(elemento > (raiz)->valor){
+        removerNo((raiz)->dir,elemento);
     }
-    else if((*raiz)->esq!=NULL && (*raiz)->dir!=NULL){
+    else if((raiz)->esq!=NULL && (raiz)->dir!=NULL){
         no *aux= NULL;
-        aux = DoisFilhos((*raiz)->dir);
-        (*raiz)->valor = aux->valor;
-        removerNo(&(*raiz)->dir,(*raiz)->valor);
+        aux = DoisFilhos((raiz)->dir);
+        (raiz)->valor = aux->valor;
+        removerNo((raiz)->dir,(raiz)->valor);
     }
     else {
-        no *aux = (*raiz);
-        if((*raiz)->esq==NULL) {
-            (*raiz) = (*raiz)->dir;
+        no *aux = (raiz);
+        if((raiz)->esq==NULL) {
+            (raiz) = (raiz)->dir;
         }
         else {
-            *raiz = (*raiz)->esq;
+            raiz = (raiz)->esq;
         }
         free(aux);
     }
 }
 
 void pesquisaOrdemSimetrica(no *raiz) {
-    if(raiz == NULL)
-        return;
-    pesquisaOrdemSimetrica(raiz->esq);
-    printf("%d \n",raiz->valor);
-    pesquisaOrdemSimetrica(raiz->dir);
+    if(raiz != NULL) {
+        pesquisaOrdemSimetrica(raiz->esq);
+        printf("%d \n",raiz->valor);
+        pesquisaOrdemSimetrica(raiz->dir);
+    }
 }
 
 void pesquisaPosOrdem(no *raiz) {
@@ -180,20 +180,31 @@ int ehCheia(){
 // > Trocando temporariamente "return;" por "return -1;" 
 int posicao(no *raiz, int tam, int n) {
     if(raiz == NULL) return -1;
-    posicao(raiz->esq, tam, n);
-    tam = tam + 1;
-    if(n == raiz->valor) return tam;
-    printf("%d \n", raiz->valor);
-    if(n == raiz->valor)
-    posicao(raiz->dir, tam, n);
-}       
+    while(raiz->esq != NULL)
+        posicao(raiz->esq, tam++, n);
+        if(n == raiz->valor)
+        return tam;
+    //tam = tam + 1;
+    //printf("%d \n", raiz->valor);
+    while(raiz->dir != NULL)    
+    posicao(raiz->dir, tam++, n);
+    return tam;
+}        
 
-void toString(no* root, int level) {
-    if(root == NULL) return;
-    if(level == 1) printf("%d ", root->valor);
+void toString(no* raiz, int level) {
+    if(raiz == NULL) return;
+    if(level == 1) printf("%d ", raiz->valor);
     else if (level > 1) {
-    toString(root->esq, level-1);
-    toString(root->dir, level-1);
+    toString(raiz->esq, level-1);
+    toString(raiz->dir, level-1);
+    }
+}
+
+void toStringALL(no* raiz) {
+    int i = 0;
+    while(i <= altura(*raiz)){
+        i++;
+        toString(raiz, i);
     }
 }
 
@@ -241,4 +252,28 @@ int enesimoElemento(int n, no* raiz) {
     return enesimo;
 }
 
+int mediana(no *raiz){
+        
+    //int posicao = 1;
+    int n = 1;
+    int mediana2 = nodo(raiz);
+    if((mediana2 % 2) == 0){
+    mediana2 = mediana2/2;
+    }else {
+    mediana2 = (mediana2 + 1)/2;
+    }
+
+
+    while(n <= mediana2){
+    if(raiz == NULL);
+    mediana(raiz->esq);
+    //return 
+    raiz->valor;
+    mediana(raiz->dir);
+    //n++;
+}
+    return raiz->valor;
+
+
+}
 
