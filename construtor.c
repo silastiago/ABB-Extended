@@ -17,3 +17,27 @@ void construirDeArquivo(no **raiz) {
 
 	fclose(arq);
 }
+
+// EXECUTA COMANDOS DO ARQUIVO DE COMANDOS
+void executarComandos(no **pp_raiz, no *p_raiz, no raiz) {
+	char url[]="arquivodecomandos.txt";
+	FILE *arq;
+	arq = fopen(url, "r");
+
+	char comando[30];
+	int valor;
+
+	while ((fscanf(arq, "%s", &comando)) != EOF) {
+		if (comando == "IMPRIMA") {
+			
+		}
+	}
+}
+
+
+
+
+
+
+
+

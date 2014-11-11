@@ -1,7 +1,23 @@
 #include "construtor.c"
 
+int menu() {
+	int opcao;
+	printf("\n < - - - - Escolha uma opcao - - - - >\n");
+	printf("1 - EXECUTAR ARQUIVO DE COMANDO \n");
+	printf("2 - OUTRAS OPCOES\n");
+	scanf("%d", &opcao);
+
+	if (opcao == 1) {
+		executarComandos();
+	}
+	if (opcao == 2) {
+		showMenu();
+	}
+	return opcao
+}
+
 int showMenu() {
-	int menu;
+	int mymenu;
 
 	printf("\n Digite uma opção do menu\n");
     printf("1 - Inserir\n");
@@ -20,14 +36,14 @@ int showMenu() {
     printf("14 - Sequencia em nivel\n");
     scanf("%d", &menu);
 
-    return menu;
+    return mymenu;
 }
 
 int main() {
 
     int i = 0;
     int level;
-    int menu;
+    int mymenu;
     int inserirNumero;
     int buscaNumero;
     int resultBusca;
@@ -39,7 +55,7 @@ int main() {
     int localizacao;
     no *raiz = NULL;
 
-    menu = showMenu();
+    mymenu = showMenu();
     
     while(menu < 15){
 		switch (menu){

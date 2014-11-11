@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "pilha.c"
 
 typedef struct no{
     struct no *esq;
@@ -16,15 +17,13 @@ int ABB_vazia(no *r){
     else return 0;
 }
 
-int busca(no* a, int c){
-    if(ABB_vazia(a)){
-        printf("Elemento %d nao consta na arvore.\n",c);
-        return 0;
-    }
-    /* árvore vazia: não encontrou */
-    else {
-        printf("Elemento %d consta na arvore.\n",c);
-        return a->valor == c || busca(a->esq,c) || busca(a->dir,c);
+no* busca(no* raiz, int elemento) {
+    if(raiz != NULL) {
+        busca(raiz->esq, elemento);
+        if (raiz->valor == elemento){
+            return raiz;
+        }
+        busca(raiz->dir, elemento);
     }
 }
 
@@ -216,14 +215,30 @@ void ehCompleta(no raiz) {
 }
 
 int enesimoElemento(int n, no* raiz) {
-    int count;
-    int enesimoValor;
-
-    for (count = 0; count <= n-1; count++) {
-        if(raiz == NULL) break;
-        pesquisaOrdemSimetrica(raiz->esq);
-        enesimoValor = raiz->valor;
-        pesquisaOrdemSimetrica(raiz->dir);
+    //Cria uma lista com a quantidade de nos da arvore.
+    int lista[nodo(raiz)];
+    stack *p;
+    int count = 0;
+    int elemento;
+    no *auxA = raiz;
+    no *auxB;
+    while((pilha_vazia(p) == 0) || auxA != NULL) {
+        while(auxA != NULL) {
+            push(p, auxA->valor);
+            auxA = auxA->esq;
+        }
+        if(pilha_vazia(p) == 0) {
+            elemento = pop(p); 
+            lista[count] = elemento;
+            count++;
+            auxB = busca(auxA, elemento);
+            auxA = auxB->dir;
+        }
     }
-    return enesimoValor;
+
+    int enesimo = lista[n-1];
+    printf("O %d-esimo e = %d\n", n, enesimo);
+    return enesimo;
 }
+
+
