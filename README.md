@@ -24,5 +24,3 @@ Para compilar projeto:
 
 	Executando o projeto:
 	./teste
-
-
